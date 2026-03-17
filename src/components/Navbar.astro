@@ -1,0 +1,38 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = '' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-charcoal-900/80 backdrop-blur-md border-b border-charcoal-600/30">
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-semibold tracking-tight text-white hover:text-gray-200 transition-colors">
+      MTL
+    </a>
+
+    <ul class="flex items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class={`text-sm font-medium transition-colors ${
+              currentPage === link.href
+                ? 'text-white'
+                : 'text-gray-400 hover:text-white'
+            }`}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
